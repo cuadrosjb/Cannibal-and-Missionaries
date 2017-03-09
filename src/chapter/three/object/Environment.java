@@ -16,7 +16,7 @@ public class Environment {
 	}
 	
 	public void findGoal(){
-		
+		Agent depthFirst = new DepthFirst();
 	}
 	
 	

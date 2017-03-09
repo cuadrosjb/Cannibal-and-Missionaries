@@ -1,5 +1,6 @@
 package chapter.three.object;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Rules {
@@ -8,6 +9,9 @@ public class Rules {
 	List<Person> leftSide;
 
 	public Rules() {
+		
+		rightSide = new ArrayList<Person>();
+		leftSide = new ArrayList<Person>();
 
 	}
 
@@ -16,10 +20,6 @@ public class Rules {
 		this.leftSide = leftSide;
 	}
 
-	public State nextState(State state) {
-
-		return null;
-	}
 
 	public boolean isItExpandable() {
 

@@ -5,8 +5,10 @@ import java.util.List;
 
 public class State {
 	
-	List<Person> rightSide;
-	List<Person> leftSide;
+	private List<Person> rightSide;
+	private List<Person> leftSide;
+	
+	private Boat boat;
 	
 	public State(){
 		leftSide = new ArrayList<Person>();
@@ -16,6 +18,8 @@ public class State {
 		leftSide.add(new Missionary());
 		leftSide.add(new Missionary());
 		leftSide.add(new Missionary());
+		
+		boat = new Boat();
 		
 		rightSide = new ArrayList<Person>();
 		
@@ -37,6 +41,31 @@ public class State {
 		for(Person p : leftSide){
 			p.speak();
 		}
+	}
+	
+	
+	public List<Person> getRightSide() {
+		return rightSide;
+	}
+
+	public void setRightSide(List<Person> rightSide) {
+		this.rightSide = rightSide;
+	}
+
+	public List<Person> getLeftSide() {
+		return leftSide;
+	}
+
+	public void setLeftSide(List<Person> leftSide) {
+		this.leftSide = leftSide;
+	}
+
+	public Boat getBoat() {
+		return boat;
+	}
+
+	public void setBoat(Boat boat) {
+		this.boat = boat;
 	}
 
 	public static void main(String[] args) {
