@@ -3,6 +3,8 @@ package chapter.three.object;
 import java.util.ArrayList;
 import java.util.List;
 
+import chapter.three.search.DepthFirst;
+
 public class Environment {
 	
 	Tree<State> tree;
@@ -16,7 +18,8 @@ public class Environment {
 	}
 	
 	public void findGoal(){
-		Agent depthFirst = new DepthFirst();
+		Agent depthFirst = new DepthFirst(tree, goalState);
+		
 	}
 	
 	
