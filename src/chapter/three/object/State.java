@@ -76,4 +76,45 @@ public class State {
 
 	}
 
+	public boolean equals(State s) {
+		if(s.getBoat().isLeft() && this.getBoat().isLeft()
+				|| s.getBoat().isRight() && this.getBoat().isRight()){
+			if(s.getLeftSide().size() == this.getLeftSide().size() 
+					&& s.getRightSide().size() == this.getRightSide().size()){
+				int numCann = 0;
+				int numMiss = 0;
+				
+				int numCannT = 0;
+				int numMissT = 0;
+				
+				for(Person p : s.getLeftSide()){
+					if(p instanceof Cannibal){
+						numCann++;
+					}else{
+						numMiss++;
+					}
+				}
+				
+				for(Person p : getLeftSide()){
+					if(p instanceof Cannibal){
+						numCannT++;
+					}else{
+						numMissT++;
+					}
+				}
+				
+				if(numCann == numCannT && numMissT==numMiss){
+					return true;
+				}else{
+					return false;
+				}
+				
+			}else{
+				return false;
+			}
+		}else{
+			return false;
+		}
+	}
+
 }

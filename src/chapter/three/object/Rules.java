@@ -5,8 +5,10 @@ import java.util.List;
 
 public class Rules {
 
-	List<Person> rightSide;
-	List<Person> leftSide;
+	private List<Person> rightSide;
+	private List<Person> leftSide;
+	
+	private State state;
 
 	public Rules() {
 		
@@ -14,6 +16,12 @@ public class Rules {
 		leftSide = new ArrayList<Person>();
 
 	}
+	
+	public Rules(State state){
+		this.rightSide = state.getRightSide();
+		this.leftSide = state.getLeftSide();
+	}
+	
 
 	public Rules(List<Person> rightSide, List<Person> leftSide) {
 		this.rightSide = rightSide;

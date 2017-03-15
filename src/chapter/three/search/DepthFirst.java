@@ -3,15 +3,13 @@ package chapter.three.search;
 import java.util.ArrayList;
 import java.util.List;
 
-import chapter.three.object.Agent;
-import chapter.three.object.Boat;
 import chapter.three.object.Cannibal;
-import chapter.three.object.Missionary;
 import chapter.three.object.Person;
+import chapter.three.object.Rules;
 import chapter.three.object.State;
 import chapter.three.object.Tree;
 
-public class DepthFirst implements Agent{
+public class DepthFirst implements Search{
 
 	private State initialState;
 	private State goal;
@@ -34,6 +32,30 @@ public class DepthFirst implements Agent{
 	public DepthFirst(State initialState){
 		this.initialState = initialState;
 	}
+	
+	public State findGoalState(){
+		State head = tree.getHead();
+		List<State> temp = allPossibleMoves(head);
+		
+		for(State s : temp){
+			if((new Rules(s).isItExpandable())){
+				
+				tree.addLeaf(head, s);
+				
+			}
+		}
+		
+		
+//		while(current.equals(goal)){
+//			
+//		}
+		
+		return null;
+	}
+	
+	
+	
+	
 	
 	public List<State> allPossibleMoves(State current) {
 
@@ -247,6 +269,30 @@ public class DepthFirst implements Agent{
 
 		return moves;
 
+	}
+
+	public State getInitialState() {
+		return initialState;
+	}
+
+	public void setInitialState(State initialState) {
+		this.initialState = initialState;
+	}
+
+	public State getGoal() {
+		return goal;
+	}
+
+	public void setGoal(State goal) {
+		this.goal = goal;
+	}
+
+	public Tree<State> getTree() {
+		return tree;
+	}
+
+	public void setTree(Tree<State> tree) {
+		this.tree = tree;
 	}
 	
 	
