@@ -3,6 +3,13 @@ package chapter.three.object;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class that validates every possible move 
+ * by from state to state 
+ * 
+ * @author Jeffrey B Cuadros
+ *
+ */
 public class Rules {
 
 	private List<Person> rightSide;
@@ -29,6 +36,9 @@ public class Rules {
 	}
 
 
+	/**
+	 * @return true If the new move complies with the set of rules 
+	 */
 	public boolean isItExpandable() {
 
 		int numberOfCann = 0;
@@ -59,6 +69,30 @@ public class Rules {
 		else
 			return true;
 
+	}
+
+	public List<Person> getRightSide() {
+		return rightSide;
+	}
+
+	public void setRightSide(List<Person> rightSide) {
+		this.rightSide = rightSide;
+	}
+
+	public List<Person> getLeftSide() {
+		return leftSide;
+	}
+
+	public void setLeftSide(List<Person> leftSide) {
+		this.leftSide = leftSide;
+	}
+
+	public State getState() {
+		return state;
+	}
+
+	public void setState(State state) {
+		this.state = state;
 	}
 
 }

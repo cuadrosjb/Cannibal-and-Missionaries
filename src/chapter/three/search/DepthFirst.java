@@ -7,24 +7,52 @@ import chapter.three.object.Cannibal;
 import chapter.three.object.Person;
 import chapter.three.object.State;
 
+/**
+ * Class that implements the interface Search, 
+ * try to find the goal state by implementing a Depth Limited Search
+ * 
+ * 
+ * @author Jeffrey B Cuadros
+ * @version 1.0
+ * @since 2017/03/17
+ *
+ */
 public class DepthFirst implements Search{
 
 	private State goal;
 	private State initialState;
 	
+	/**
+	 * Empty-Constructor that initiates the initial state.
+	 * 
+	 */
 	public DepthFirst(){
 		initialState = new State();
 	}
 	
+	/**
+	 * Constructor that initiates the initial and goal state.
+	 * 
+	 * @param goal Set the goal state
+	 */
 	public DepthFirst(State goal){
 		initialState = new State();
 		this.goal = goal;
 	}
 	
+
+
 	public State findGoalState() {
 		return findGoalState(initialState, 10);
 	}
 	
+	/**
+	 * Recursive function to find the goal state
+	 * 
+	 * @param state current state of the 
+	 * @param limit max depth we are going for
+	 * @return return the goal state
+	 */
 	public State findGoalState(State state, int limit) {
 		if (state.equals(goal)) {
 			return state;
@@ -43,6 +71,10 @@ public class DepthFirst implements Search{
 	}
 	
 	
+	/**
+	 * @param current State
+	 * @return All possible moves
+	 */
 	public List<State> allPossibleMoves(State current) {
 
 		List<State> moves = new ArrayList<State>();

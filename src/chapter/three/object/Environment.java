@@ -6,6 +6,13 @@ import java.util.List;
 import chapter.three.search.Search;
 import chapter.three.search.DepthFirst;
 
+/**
+ * Class that instantiates the Depth First Search and 
+ * sets and tries to find the goal state
+ * 
+ * @author Jeffrey B Cuadros
+ *
+ */
 public class Environment {
 	
 	State goalState;

@@ -3,15 +3,33 @@ package chapter.three.object;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * State class holds all the details about the current state 
+ * of the environment
+ * 
+ * Note:
+ * After been stuck for few days, noticed that my Tree Class 
+ * was not working as it should, instead I tried the Pointer to the 
+ * parent. Idea from: https://github.com/marianafranco/missionaries-and-cannibals
+ * 
+ * 
+ * @author Jeffrey B Cuadros
+ * @version 1.0
+ * @since 2017/03/17
+ *
+ */
 public class State {
 	
 	private List<Person> rightSide;
 	private List<Person> leftSide;
 	
 	private Boat boat;
-	//Got the idea from https://github.com/marianafranco/missionaries-and-cannibals
+	
 	private State parent;
 	
+	/**
+	 * Empty-Constructor that sets up the initial state
+	 */
 	public State(){
 		leftSide = new ArrayList<Person>();
 		leftSide.add(new Cannibal());
@@ -28,12 +46,25 @@ public class State {
 		
 	}
 	
+	/**
+	 * Constructor that sets up the state from the parameters given
+	 * 
+	 * @param rightSide List of Objects inside the Right list
+	 * @param leftSide List of Objects inside the Left list
+	 */
 	public State(List<Person> rightSide, List<Person> leftSide) {
 		this.rightSide = rightSide;
 		this.leftSide = leftSide;
 		boat = new Boat();
 	}
 	
+	/**
+	 * Constructor that sets up the state from the parameters given
+	 * 
+	 * @param rightSide List of Objects inside the Right list
+	 * @param leftSide List of Objects inside the Left list
+	 * @param boat Set the Boat to the assign location
+	 */
 	public State(List<Person> rightSide, List<Person> leftSide, Boat boat) {
 		this.rightSide = rightSide;
 		this.leftSide = leftSide;
@@ -41,6 +72,10 @@ public class State {
 	}
 	
 	
+	/**
+	 * @param list
+	 * @return number of missionaries
+	 */
 	public int getNumberOfMissionaries(List<Person> list){
 		int counter = 0;
 		for(Person p : list){
@@ -51,6 +86,10 @@ public class State {
 		
 		return counter;
 	}
+	/**
+	 * @param list
+	 * @return number of cannibals
+	 */
 	public int getNumberOfCannibals(List<Person> list){
 		int counter = 0;
 		for(Person p : list){
@@ -62,6 +101,9 @@ public class State {
 		return counter;
 	}
 	
+	/**
+	 * @return Boat location
+	 */
 	public String getBoatLocation(){
 		if(boat.isRight() == true && boat.isLeft() == false){
 			return "Right";
@@ -93,7 +135,22 @@ public class State {
 	public void setBoat(Boat boat) {
 		this.boat = boat;
 	}
+	
+	
 
+	public State getParent() {
+		return parent;
+	}
+
+	public void setParent(State parent) {
+		this.parent = parent;
+	}
+
+	/**
+	 * main function to test functionality
+	 * 
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		
 		State s = new State();
@@ -127,6 +184,11 @@ public class State {
 
 	}
 
+	/**
+	 * Function to test if the two states are equal
+	 * @param s
+	 * @return true if the two states are the same
+	 */
 	public boolean equals(State s) {
 		if(s.getBoat().isLeft() && this.getBoat().isLeft()
 				|| s.getBoat().isRight() && this.getBoat().isRight()){

@@ -1,5 +1,13 @@
 package chapter.three.object;
 
+
+
+/**
+ * Boat class that helps locate the boat
+ * 
+ * @author Jeffrey B Cuadros
+ *
+ */
 public class Boat {
 	
 	private boolean right;
