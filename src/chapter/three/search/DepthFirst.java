@@ -5,56 +5,42 @@ import java.util.List;
 
 import chapter.three.object.Cannibal;
 import chapter.three.object.Person;
-import chapter.three.object.Rules;
 import chapter.three.object.State;
-import chapter.three.object.Tree;
 
 public class DepthFirst implements Search{
 
-	private State initialState;
 	private State goal;
-	private Tree<State> tree;
-	
-	
+	private State initialState;
 	
 	public DepthFirst(){
 		initialState = new State();
 	}
 	
-	public DepthFirst(Tree<State> tree, State goal){
-		this.initialState = new State();
-		this.tree = tree;
+	public DepthFirst(State goal){
+		initialState = new State();
 		this.goal = goal;
-		
 	}
 	
-	
-	public DepthFirst(State initialState){
-		this.initialState = initialState;
+	public State findGoalState() {
+		return findGoalState(initialState, 10);
 	}
 	
-	public State findGoalState(){
-		State head = tree.getHead();
-		List<State> temp = allPossibleMoves(head);
-		
-		for(State s : temp){
-			if((new Rules(s).isItExpandable())){
-				
-				tree.addLeaf(head, s);
-				
+	public State findGoalState(State state, int limit) {
+		if (state.equals(goal)) {
+			return state;
+		} else if (limit == 0) {
+			return null;
+		} else {
+			List<State> successors = new DepthFirst().allPossibleMoves(state);
+			for (State child : successors) {
+				State result = findGoalState(child, limit - 1);
+				if (null != result) {
+					return result;
+				}
 			}
+			return null;
 		}
-		
-		
-//		while(current.equals(goal)){
-//			
-//		}
-		
-		return null;
 	}
-	
-	
-	
 	
 	
 	public List<State> allPossibleMoves(State current) {
@@ -201,8 +187,8 @@ public class DepthFirst implements Search{
 				nRL = new ArrayList<Person>(current.getRightSide());
 				nLL = new ArrayList<Person>(current.getLeftSide());
 				
-				nRL.add(lstCannibal.get(0));
-				nLL.remove(lstCannibal.get(0));
+				nRL.add(lstMissionary.get(0));
+				nLL.remove(lstMissionary.get(0));
 				
 				s = new State(nRL, nLL);
 				
@@ -218,8 +204,8 @@ public class DepthFirst implements Search{
 				
 				nRL.add(lstCannibal.get(0));
 				nLL.remove(lstCannibal.get(0));
-				nRL.add(lstCannibal.get(0));
-				nLL.remove(lstCannibal.get(0));
+				nRL.add(lstMissionary.get(0));
+				nLL.remove(lstMissionary.get(0));
 				
 				s = new State(nRL, nLL);
 				
@@ -286,14 +272,5 @@ public class DepthFirst implements Search{
 	public void setGoal(State goal) {
 		this.goal = goal;
 	}
-
-	public Tree<State> getTree() {
-		return tree;
-	}
-
-	public void setTree(Tree<State> tree) {
-		this.tree = tree;
-	}
-	
 	
 }

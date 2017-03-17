@@ -9,6 +9,8 @@ public class State {
 	private List<Person> leftSide;
 	
 	private Boat boat;
+	//Got the idea from https://github.com/marianafranco/missionaries-and-cannibals
+	private State parent;
 	
 	public State(){
 		leftSide = new ArrayList<Person>();
@@ -29,20 +31,44 @@ public class State {
 	public State(List<Person> rightSide, List<Person> leftSide) {
 		this.rightSide = rightSide;
 		this.leftSide = leftSide;
+		boat = new Boat();
 	}
 	
-	public void print(){
-		System.out.println("Right side");
-		for(Person p : rightSide){
-			p.speak();
+	public State(List<Person> rightSide, List<Person> leftSide, Boat boat) {
+		this.rightSide = rightSide;
+		this.leftSide = leftSide;
+		this.boat = boat;
+	}
+	
+	
+	public int getNumberOfMissionaries(List<Person> list){
+		int counter = 0;
+		for(Person p : list){
+			if(p instanceof Missionary){
+				counter++;
+			}
 		}
 		
-		System.out.println("Left side");
-		for(Person p : leftSide){
-			p.speak();
+		return counter;
+	}
+	public int getNumberOfCannibals(List<Person> list){
+		int counter = 0;
+		for(Person p : list){
+			if(p instanceof Cannibal){
+				counter++;
+			}
 		}
+		
+		return counter;
 	}
 	
+	public String getBoatLocation(){
+		if(boat.isRight() == true && boat.isLeft() == false){
+			return "Right";
+		}else{
+			return "Left";
+		}
+	}
 	
 	public List<Person> getRightSide() {
 		return rightSide;
@@ -71,7 +97,32 @@ public class State {
 	public static void main(String[] args) {
 		
 		State s = new State();
-		s.print();
+		
+		
+		
+		List<Person> left = new ArrayList<Person>();
+		
+		List<Person> right = new ArrayList<Person>();
+		right.add(new Missionary());
+		right.add(new Missionary());
+		right.add(new Cannibal());
+		right.add(new Cannibal());
+		right.add(new Cannibal());
+		
+		right.add(new Missionary());
+		
+		s.setRightSide(right);
+		s.getBoat().setRight(true);
+		s.getBoat().setLeft(false);
+		
+		s.setLeftSide(left);
+		
+		State goal = new State(right, left);
+		
+		goal.getBoat().setRight(true);
+		goal.getBoat().setLeft(false);
+		
+		System.out.println(s.equals(goal));
 		
 
 	}
@@ -103,7 +154,32 @@ public class State {
 					}
 				}
 				
-				if(numCann == numCannT && numMissT==numMiss){
+				
+				int numCannL = 0;
+				int numMissL = 0;
+				
+				int numCannTL = 0;
+				int numMissTL = 0;
+				
+				for(Person p : s.getRightSide()){
+					if(p instanceof Cannibal){
+						numCannL++;
+					}else{
+						numMissL++;
+					}
+				}
+				
+				for(Person p : getRightSide()){
+					if(p instanceof Cannibal){
+						numCannTL++;
+					}else{
+						numMissTL++;
+					}
+				}
+				
+				
+				if(numCann == numCannT && numMissT==numMiss 
+						&& numCannL == numCannTL && numMissTL==numMissL){
 					return true;
 				}else{
 					return false;
@@ -115,6 +191,12 @@ public class State {
 		}else{
 			return false;
 		}
+	}
+
+	@Override
+	public String toString() {
+		return "State: [Left contains " + getNumberOfCannibals(getLeftSide()) + " Cannibals and " + getNumberOfMissionaries(getLeftSide()) + " Missionaries]"  
+	+  " [Right contains " + getNumberOfCannibals(getRightSide()) + " Cannibals and " + getNumberOfMissionaries(getRightSide()) + " Missionaries] [Boat is located: " + getBoatLocation()+"]";
 	}
 
 }

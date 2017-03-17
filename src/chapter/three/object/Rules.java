@@ -41,7 +41,7 @@ public class Rules {
 				numberOfMiss++;
 		}
 
-		if (numberOfCann > numberOfMiss)
+		if (numberOfCann > numberOfMiss && numberOfMiss > 0)
 			return false;
 
 		numberOfCann = 0;
@@ -54,7 +54,7 @@ public class Rules {
 				numberOfMiss++;
 		}
 
-		if (numberOfCann > numberOfMiss)
+		if (numberOfCann > numberOfMiss && numberOfMiss > 0)
 			return false;
 		else
 			return true;

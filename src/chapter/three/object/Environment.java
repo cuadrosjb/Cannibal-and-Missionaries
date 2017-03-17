@@ -8,19 +8,15 @@ import chapter.three.search.DepthFirst;
 
 public class Environment {
 	
-	Tree<State> tree;
 	State goalState;
 	
 	public Environment(){
-		
-		tree = new Tree<State>(new State());
-		
 		setGoalState();
 	}
 	
 	public void findGoal(){
-		Search depthFirst = new DepthFirst(tree, goalState);
-		
+		Search depthFirst = new DepthFirst(goalState);
+		System.out.println(depthFirst.findGoalState().toString());
 	}
 	
 	
@@ -36,6 +32,8 @@ public class Environment {
 		right.add(new Missionary());
 		
 		goalState = new State(right, left);
+		goalState.getBoat().setRight(true);
+		goalState.getBoat().setLeft(false);
 	}
 	
 	public static void main(String[] args){
